@@ -1,0 +1,30 @@
+[package]
+name = "tracing-util"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "1.0"
+chrono = "0.4"
+envy = "0.4"
+http = "1.0"
+opentelemetry = "0.21"
+opentelemetry-jaeger = { version = "0.20", features = ["hyper_collector_client", "rt-tokio"] }
+opentelemetry_sdk = { version = "0.21", features = ["rt-tokio"] }
+serde = { version = "1.0", features = ["derive"] }
+tracing = "0.1"
+tracing-error = "0.2"
+tracing-log = "0.2"
+tracing-opentelemetry = "0.22"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+tracing-tree = "0.3"
+
+axum = { version = "0.7", optional = true }
+axum-client-ip = { version = "0.5", optional = true }
+derivative = { version = "2.2", optional = true }
+derive_more = { version = "0.99", optional = true }
+tower-http = { version = "0.5", features = ["request-id"], optional = true }
+uuid = { version = "1.7", features = ["serde"], optional = true }
+
+[features]
+server = ["dep:axum", "dep:axum-client-ip", "dep:derivative", "dep:derive_more", "dep:tower-http", "dep:uuid"]
