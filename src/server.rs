@@ -75,7 +75,9 @@ where
 pub mod make_span {
     use super::*;
 
-    pub fn debug<B>(secure_client_ip_source: SecureClientIpSource) -> impl Fn(&Request<B>) -> Span {
+    pub fn debug<B>(
+        secure_client_ip_source: SecureClientIpSource,
+    ) -> impl Clone + Fn(&Request<B>) -> Span {
         move |req| {
             set_trace_parent(
                 req.headers(),
@@ -90,7 +92,9 @@ pub mod make_span {
         }
     }
 
-    pub fn error<B>(secure_client_ip_source: SecureClientIpSource) -> impl Fn(&Request<B>) -> Span {
+    pub fn error<B>(
+        secure_client_ip_source: SecureClientIpSource,
+    ) -> impl Clone + Fn(&Request<B>) -> Span {
         move |req| {
             set_trace_parent(
                 req.headers(),
@@ -105,7 +109,9 @@ pub mod make_span {
         }
     }
 
-    pub fn info<B>(secure_client_ip_source: SecureClientIpSource) -> impl Fn(&Request<B>) -> Span {
+    pub fn info<B>(
+        secure_client_ip_source: SecureClientIpSource,
+    ) -> impl Clone + Fn(&Request<B>) -> Span {
         move |req| {
             set_trace_parent(
                 req.headers(),
@@ -120,7 +126,9 @@ pub mod make_span {
         }
     }
 
-    pub fn trace<B>(secure_client_ip_source: SecureClientIpSource) -> impl Fn(&Request<B>) -> Span {
+    pub fn trace<B>(
+        secure_client_ip_source: SecureClientIpSource,
+    ) -> impl Clone + Fn(&Request<B>) -> Span {
         move |req| {
             set_trace_parent(
                 req.headers(),
@@ -135,7 +143,9 @@ pub mod make_span {
         }
     }
 
-    pub fn warn<B>(secure_client_ip_source: SecureClientIpSource) -> impl Fn(&Request<B>) -> Span {
+    pub fn warn<B>(
+        secure_client_ip_source: SecureClientIpSource,
+    ) -> impl Clone + Fn(&Request<B>) -> Span {
         move |req| {
             set_trace_parent(
                 req.headers(),
