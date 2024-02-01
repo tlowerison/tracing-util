@@ -270,8 +270,8 @@ fn deserialize_log_target_default_level<'de, D>(de: D) -> Result<Option<LevelFil
 where
     D: ::serde::de::Deserializer<'de>,
 {
-    Option::<&str>::deserialize(de)?
-        .map(FromStr::from_str)
+    Option::<std::borrow::Cow<'de, str>>::deserialize(de)?
+        .map(|x| FromStr::from_str(&*x))
         .transpose()
         .map_err(::serde::de::Error::custom)
 }
@@ -280,8 +280,8 @@ fn deserialize_log_target_filters<'de, D>(de: D) -> Result<Option<Targets>, D::E
 where
     D: ::serde::de::Deserializer<'de>,
 {
-    Option::<&str>::deserialize(de)?
-        .map(FromStr::from_str)
+    Option::<std::borrow::Cow<'de, str>>::deserialize(de)?
+        .map(|x| FromStr::from_str(&*x))
         .transpose()
         .map_err(::serde::de::Error::custom)
 }
